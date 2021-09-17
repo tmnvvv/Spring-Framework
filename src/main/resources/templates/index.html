@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang="RU" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Questions</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+</head>
+<body>
+<form action="/result" method="post">
+    <ol>
+        <th:block th:each="question: ${questions}">
+            <li th:utext="${question.getQuestion()}"></li>
+            <label>
+                <th:block th:each="answer: ${question.getAnswers()}">
+                    <input onclick="removeRequired();" th:name="${question.getId()}" th:utext="${answer.trim()}"
+                           th:value="${answer.trim()}"
+                           type="radio"/><br>
+                </th:block>
+            </label>
+            <label for="own_ratio"><input id="own_ratio" onclick="setRequired();" th:name="${question.getId()}"
+                                          type="radio"/></label>
+            <label for="own_answer"><input id="own_answer" onchange="changeRadioOther()" th:name="${question.getId()}"
+                                           type="text"/></label>
+            <p th:text="${question.getAnswer()}">
+        </th:block>
+    </ol>
+    <input type="submit" value="Submit">
+</form>
+<script>
+    function setRequired() {
+        document.getElementById("own_answer").required = true;
+    }
+
+    function changeRadioOther() {
+        let ratio = document.getElementById("own_ratio");
+        ratio.value = document.getElementById("own_answer").value;
+    }
+
+    function removeRequired() {
+        if (document.getElementById("own_answer").required === true) {
+            document.getElementById("own_answer").required = false;
+        }
+    }
+
+</script>
+</body>
+</html>
