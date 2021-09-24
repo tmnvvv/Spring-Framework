@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html lang="RU" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Questions</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+</head>
+
+<body>
+<!--<th:block>
+    <p data-th-text="${questions}"></p>
+</th:block>-->
+<form action="/result" method="post">
+    <ol>
+        <th:block th:each="question: ${questions}">
+            <li>
+                <div>
+                    <h3 th:utext="${question.getQuestion()}"></h3>
+                    
+                    <br>
+                    <th:block th:each="answer: ${question.getOptions()}">
+                        <label>
+                            <input
+                                   th:name="${question.getID()}"
+                               th:utext="${answer.trim()}"
+                               th:value="${answer.trim()}"
+                               type="radio"
+                               />
+                        </label>
+
+                     
+                    </th:block>
+
+                </div>
+            </li>
+            </th:block>
+    </ol>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

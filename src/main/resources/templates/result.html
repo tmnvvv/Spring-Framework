@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="RU">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+</head>
+<body>
+<h2>Thank you for your time. Your answers were sent to check</h2>
+<p th:utext="${'Right Answers:    ' + right}">
+<p th:utext="${'Wrong Answers:    ' + wrong}">
+<p th:utext="${'Toral Answers:    ' + (right + wrong)}">
+<p th:utext="${'You answered correctly: ' + (right / (right + wrong)) * 100} + '%'">
+
+</p>
+<h3><a href="/">Get back</a></h3>
+</body>
+</html>
